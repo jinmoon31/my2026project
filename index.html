@@ -9,4 +9,25 @@
   <h1>안녕하세요! 저의 첫 번째 웹페이지입니다.</h1>
   <p>이 페이지는 곧 멋진 서비스가 될 예정입니다.</p>
 </body>
+  <!-- CDN으로 Supabase 불러오기 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // Supabase 초기화
+  const supabase = supabase.createClient(
+    'https://daflibnfwaijftbfdxoq.supabase.co',  // Project URL
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRhZmxpYm5md2FpamZ0YmZkeG9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNTA5MzYsImV4cCI6MjA4OTkyNjkzNn0.rFNEJ7jnBfHj4ADL9Yttc8s4PfZHUjQU0l6BFdfSdfc'                        // anon public 키
+  );
+
+  // 댓글 조회
+  const { data } = await supabase
+    .from('comments')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  // 댓글 작성
+  await supabase
+    .from('comments')
+    .insert({ nickname: '홍길동', content: '안녕하세요!' });
+</script>
 </html>
